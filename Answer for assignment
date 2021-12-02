@@ -1,0 +1,30 @@
+# Coursera R programming week3 assignment
+#Now i will define two function to satisify the requirement 
+#the first one is makeCacheMatrix
+
+makeCacheMatrix <- function(x = matrix()) {
+        a <- NULL
+        set <- function(y) {
+                x <<- y
+                a <<- NULL
+        }
+        get <- function() x
+        setmean <- function(mean) a <<- mean
+        getmean <- function() a
+        list(set = set, get = get,
+             setmean = setmean,
+             getmean = getmean)
+}
+
+# the cachSolve
+cacheSolve <- function(x, ...) {
+    b<- x$getinverse()
+    if(!is.null(b)) {
+        message("getting cached data")
+        return(b)
+    }
+    data <- x$get()
+    inv <- solve(data, ...)
+    x$setinverse(inv)
+    inv
+}
